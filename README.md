@@ -2,7 +2,7 @@
 
 ## Day 1 Homework
 
-*Make the button change the text of the heading(h1)
+* Make the button change the text of the heading(h1)
 
 ## Bonus Credit
 
@@ -13,3 +13,7 @@
 * Add a form to the page
 * Add a text input to the form.
 * When form is submittted, update the heading with the text typed in the input
+
+## Super Mega Bonus Credit 2
+
+* Make sure it works when you hit enter on the keyboard, not just when you click the button
