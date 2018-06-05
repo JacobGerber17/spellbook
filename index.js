@@ -13,8 +13,9 @@ const changeHeader2 = function(){
 
 const formChange = function(ev){
     ev.preventDefault()
-    const formText = document.querySelector('#formText').value
-    header.innerHTML = formText
+    const f = ev.target
+    const formText = f.formText.value
+    header.textContent = formText
 }
 
 button.addEventListener('click', changeHeader2)
