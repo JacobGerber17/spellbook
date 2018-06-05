@@ -15,7 +15,7 @@ const formChange = function(ev){
     ev.preventDefault()
     const f = ev.target
     const formText = f.formText.value
-    document.querySelector('#spells').innerHTML += formText + '<br>'
+    document.querySelector('#spells').innerHTML += `<p>${formText}</p>`
     f.reset()
 }
 
