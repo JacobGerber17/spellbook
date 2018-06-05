@@ -3,11 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Spellbook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
 </head>
 <body>
+    <img src="skull.png" id="skull" alt="">
+    <img src="quill.png" id="quill" alt="">
     <h1 id="header1">Spellbook</h1>
     <!--
     Old code from homework. Removed to make site look better
@@ -16,13 +18,16 @@
     -->
 
     <form>
-        <input type="text" name="formText" placeholder="Enter Spell Name" autofocus>
-        <button type="submit">Add</button>
+        <div>
+            <input type="text" name="formText" placeholder="Enter Spell Name" autofocus>
+            <button type="submit">Add</button>
+        </div>
     </form>
+    <main>
+        <ul id="spells">
 
-    <ul id="spells">
-
-    </ul>
+        </ul>
+    </main>
 
     <script src="index.js"></script>
 </body>
