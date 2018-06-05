@@ -16,9 +16,23 @@ const formChange = function(ev){
     const f = ev.target
     const formText = f.formText.value
     const manaCost = f.manaCost.value
-    document.querySelector('#spells').innerHTML += `<li>${formText} (${manaCost} MP)</li>`
+    const spellList = document.querySelector('#spells')
+    let spell = document.createElement('li')
+    let spellText = document.createElement('span')
+    spellText.className = 'spellName'
+    let spellCost = document.createElement('span')
+    spellCost.className = 'spellCost'
+    let name = document.createTextNode(formText)
+    let cost = document.createTextNode('(' + manaCost + 'MP)')
+    spellText.appendChild(name)
+    spellCost.appendChild(cost)
+    spell.appendChild(spellText)
+    spell.appendChild(spellCost)
+    spellList.appendChild(spell)
     f.reset()
+    
 }
 
-button.addEventListener('click', changeHeader2)
+
+//button.addEventListener('click', changeHeader2)
 form.addEventListener('submit', formChange)
