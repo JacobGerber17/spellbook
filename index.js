@@ -15,7 +15,8 @@ const formChange = function(ev){
     ev.preventDefault()
     const f = ev.target
     const formText = f.formText.value
-    document.querySelector('#spells').innerHTML += `<li>${formText}</li>`
+    const manaCost = f.manaCost.value
+    document.querySelector('#spells').innerHTML += `<li>${formText} (${manaCost} MP)</li>`
     f.reset()
 }
 
