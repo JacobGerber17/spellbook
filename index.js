@@ -15,7 +15,8 @@ const formChange = function(ev){
     ev.preventDefault()
     const f = ev.target
     const formText = f.formText.value
-    header.textContent = formText
+    document.querySelector('#spells').innerHTML += formText + '<br>'
+    f.reset()
 }
 
 button.addEventListener('click', changeHeader2)
