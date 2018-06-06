@@ -187,3 +187,11 @@ ul#spells {
   margin-left: 15px;
   margin-right: 0px;
 }
+
+.edit{
+  font-size: 1em;
+  color: blue;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-right: 0px;
+}
