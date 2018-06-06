@@ -164,14 +164,19 @@ ul#spells {
 .spell{
   display: flex;
   justify-content: space-between;
+  padding-left: .3em;
 }
 
 .spellName{ 
   font-size: 1em;
   text-transform: capitalize;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .spellCost{
   font-size: 1em;
   color: red;
+  margin-left: 15px;
+  margin-right: 0px;
 }
