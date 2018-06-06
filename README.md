@@ -1,5 +1,17 @@
 # Spellbook
 
+##Day 3 Homework
+
+* In addition to building a list and adding it to DOM, add spells to an array
+
+### Bonus Credit
+
+* Add a delete button to each item that remove the item
+
+### Super Mega Bonus Credit
+
+* Remove the item from the array as well
+
 ## Day 2 Homework
 
 * Add a second field of your choice to the form.
