@@ -12,6 +12,7 @@ const formChange = function(ev){
 const addListItem = function (name, cost){
     const spellList = document.querySelector('#spells')
     let spell = document.createElement('li')
+    spell.className = 'spell'
     let spellText = addName(name)
     let spellCost = addCost(cost)
     spell.appendChild(spellText)
