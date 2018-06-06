@@ -1,6 +1,6 @@
 const form = document.querySelector('form')
 
-const formChange = function(ev){
+const handleSubmit = function(ev){
     ev.preventDefault()
     const f = ev.target
     const formText = f.formText.value
@@ -36,4 +36,4 @@ const addCost = function(cost){
     return spellCost
 }
 
-form.addEventListener('submit', formChange)
+form.addEventListener('submit', handleSubmit)

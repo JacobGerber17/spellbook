@@ -173,4 +173,5 @@ ul#spells {
 .spellCost{
   font-size: 1em;
   margin-left: 25px;
+  color: red;
 }
