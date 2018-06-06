@@ -3,18 +3,20 @@ const form = document.querySelector('form')
 const handleSubmit = function(ev){
     ev.preventDefault()
     const f = ev.target
-    const formText = f.formText.value
-    const manaCost = f.manaCost.value
-    addListItem(formText, manaCost)
+    const spell = {
+        name: f.spellName.value,
+        cost: f.manaCost.value,
+    }
+    addListItem(spell)
     f.reset()
 }
 
-const addListItem = function (name, cost){
+const addListItem = function (spellObj){
     const spellList = document.querySelector('#spells')
     let spell = document.createElement('li')
     spell.classList.add('spell')
-    let spellText = addName(name)
-    let spellCost = addCost(cost)
+    let spellText = addName(spellObj.name)
+    let spellCost = addCost(spellObj.cost)
     spell.appendChild(spellText)
     spell.appendChild(spellCost)
     spellList.appendChild(spell)
