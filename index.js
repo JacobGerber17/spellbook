@@ -15,7 +15,6 @@ const app = {
             cost: f.manaCost.value,
         }
         spellArray.push([spell.name, spell.cost])
-        console.log(spellArray)
         this.addListItem(spell)
         f.reset()
     },
