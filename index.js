@@ -12,7 +12,7 @@ const handleSubmit = function(ev){
 const addListItem = function (name, cost){
     const spellList = document.querySelector('#spells')
     let spell = document.createElement('li')
-    spell.className = 'spell'
+    spell.classList.add('spell')
     let spellText = addName(name)
     let spellCost = addCost(cost)
     spell.appendChild(spellText)
@@ -22,7 +22,7 @@ const addListItem = function (name, cost){
 
 const addName = function(name){
     let spellText = document.createElement('span')
-    spellText.className = 'spellName'
+    spellText.classList.add('spellName')
     let spellName = document.createTextNode(name)
     spellText.appendChild(spellName)
     return spellText
@@ -30,7 +30,7 @@ const addName = function(name){
 
 const addCost = function(cost){
     let spellCost = document.createElement('span')
-    spellCost.className = 'spellCost'
+    spellCost.classList.add('spellCost')
     let mp = document.createTextNode('(' + cost + 'MP)')
     spellCost.appendChild(mp)
     return spellCost
