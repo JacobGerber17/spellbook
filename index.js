@@ -1,20 +1,21 @@
 const app = {
     init: function(){
         const form = document.querySelector('form')
-        let spellArray = []
         form.addEventListener('submit', ev => {
-            this.handleSubmit(ev, spellArray)
+            this.handleSubmit(ev)
         })
     },
 
-    handleSubmit: function(ev, spellArray) {
+    spellArray: [],
+
+    handleSubmit: function(ev) {
         ev.preventDefault()
         const f = ev.target
         const spell = {
             name: f.spellName.value,
             cost: f.manaCost.value,
         }
-        spellArray.push([spell.name, spell.cost])
+        this.spellArray.push([spell.name, spell.cost])
         this.addListItem(spell)
         f.reset()
     },
@@ -25,8 +26,10 @@ const app = {
         spell.classList.add('spell')
         let spellText = this.addName(spellObj.name)
         let spellCost = this.addCost(spellObj.cost)
+        let removeButton = this.addRemoveButton()
         spell.appendChild(spellText)
         spell.appendChild(spellCost)
+        spell.appendChild(removeButton)
         spellList.appendChild(spell)
     },
 
@@ -44,6 +47,22 @@ const app = {
         let mp = document.createTextNode('(' + cost + 'MP)')
         spellCost.appendChild(mp)
         return spellCost
+    },
+
+    addRemoveButton: function() {
+        let removeButton = document.createElement('span')
+        removeButton.textContent = 'X'
+        removeButton.classList.add('delete')
+        removeButton.addEventListener('click', ev => {
+            this.removeSpell(removeButton.parentNode)
+        })
+        return removeButton;
+    },
+
+    removeSpell: function(spell){
+        spell.parentNode.removeChild(spell)
+        let i = this.spellArray.indexOf([spell.childNodes[0].textContent, spell.childNodes[1].textContent])
+        this.spellArray.splice(i, 1)
     }
 }
 

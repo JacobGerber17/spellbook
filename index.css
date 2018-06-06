@@ -176,7 +176,14 @@ ul#spells {
 
 .spellCost{
   font-size: 1em;
+  margin-left: 15px;
+  margin-right: 0px;
+}
+
+.delete{
+  font-size: 1em;
   color: red;
+  cursor: pointer;
   margin-left: 15px;
   margin-right: 0px;
 }
