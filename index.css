@@ -162,16 +162,16 @@ ul#spells {
 }
 
 .spell{
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .spellName{ 
-  font-size: 2em;
+  font-size: 1em;
   text-transform: capitalize;
 }
 
 .spellCost{
   font-size: 1em;
-  margin-left: 25px;
   color: red;
 }
