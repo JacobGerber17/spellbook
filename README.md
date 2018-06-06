@@ -1,6 +1,6 @@
 # Spellbook
 
-##Day 3 Homework
+## Day 3 Homework
 
 * In addition to building a list and adding it to DOM, add spells to an array
 

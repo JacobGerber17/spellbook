@@ -1,18 +1,21 @@
 const app = {
     init: function(){
         const form = document.querySelector('form')
+        let spellArray = []
         form.addEventListener('submit', ev => {
-            this.handleSubmit(ev)
+            this.handleSubmit(ev, spellArray)
         })
     },
 
-    handleSubmit: function(ev) {
+    handleSubmit: function(ev, spellArray) {
         ev.preventDefault()
         const f = ev.target
         const spell = {
             name: f.spellName.value,
             cost: f.manaCost.value,
         }
+        spellArray.push([spell.name, spell.cost])
+        console.log(spellArray)
         this.addListItem(spell)
         f.reset()
     },
