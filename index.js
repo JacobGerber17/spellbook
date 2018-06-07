@@ -3,11 +3,28 @@ class App {
       this.spells = []
       this.template = document.querySelector('.spell.template')
       this.list = document.querySelector('#spells')
+
+      this.load()
   
       const form = document.querySelector('form')
       form.addEventListener('submit', ev => {
         this.handleSubmit(ev)
       })
+    }
+
+    load(){
+        const spellJSON = localStorage.getItem('spells')
+
+        const spellArray = JSON.parse(spellJSON)
+
+        spellArray.forEach(this.addSpell.bind(this))
+    }
+
+    addSpell(spell){
+        this.spells.push(spell)
+  
+        const item = this.renderItem(spell)
+        this.list.appendChild(item)
     }
   
     renderItem(spell) {
@@ -25,6 +42,11 @@ class App {
           el.setAttribute('title', spell[property])
         }
       })
+
+      //mark a favorite, if applicable
+      if(spell.favorite){
+          item.classList.add('fav')
+      }
   
       // delete button
       item
@@ -152,10 +174,8 @@ class App {
         level: f.level.value,
         favorite: false,
       }
-      this.spells.push(spell)
-  
-      const item = this.renderItem(spell)
-      this.list.appendChild(item)
+      
+      this.addSpell(spell)
   
       this.save()
       f.reset()
