@@ -17,7 +17,9 @@ class App {
 
         const spellArray = JSON.parse(spellJSON)
 
-        spellArray.forEach(this.addSpell.bind(this))
+        if (spellArray) {
+            spellArray.forEach(this.addSpell.bind(this))
+        }
     }
 
     addSpell(spell){
@@ -40,6 +42,7 @@ class App {
         if (el) {
           el.textContent = spell[property]
           el.setAttribute('title', spell[property])
+          el.contentEditable = 'true'
         }
       })
 
