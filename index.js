@@ -15,7 +15,7 @@ const app = {
             name: f.spellName.value,
             cost: f.manaCost.value,
         }
-        this.spellArray.push([spell.name, spell.cost])
+        this.spellArray.push(spell)
         this.addListItem(spell)
         console.log(this.spellArray)
         f.reset()
@@ -74,7 +74,11 @@ const app = {
 
     removeSpell: function(spell){
         spell.parentNode.removeChild(spell)
-        let i = this.spellArray.indexOf([spell.childNodes[0].textContent, spell.childNodes[1].textContent])
+        let mySpell = {
+            name: spell.childNodes[0].textContent,
+            cost: spell.childNodes[1].textContent
+        }
+        let i = this.spellArray.indexOf(mySpell)
         this.spellArray.splice(i, 1)
         console.log(this.spellArray)
     },
