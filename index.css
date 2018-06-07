@@ -196,3 +196,17 @@ ul#spells {
   margin-left: 15px;
   margin-right: 0px;
 }
+
+.favButton{
+  font-size: 1em;
+  color: yellow;
+  cursor: pointer;
+}
+
+.favSpell{
+  font-weight: bold;
+}
+
+.template {
+  display: none;
+}
