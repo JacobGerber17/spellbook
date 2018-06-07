@@ -1,42 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Spellbook</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Spellbook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
 </head>
 <body>
-    <img src="skull.png" id="skull" alt="">
-    <img src="quill.png" id="quill" alt="">
-    <h1 id="header1">Spellbook</h1>
-    <form>
-        <div>
-            <input type="text" name="spellName" placeholder="Enter Spell Name" autocomplete="off" autofocus required>
-            <input type="number" name="manaCost" min="1" max="100" placeholder="Mana Cost" required>
-            <button type="submit">Add Spell</button>
-        </div>
-    </form>
-    <main>
-        <ul id="spells">
-            
-        </ul>
-    </main>
-    <li class="spell template">
-        <span class="name"></span>
-        <span class="cost"></span>
-        <span class="favButton"><i class="fas fa-star" title="favorite"></i></span>
-        <span class="edit"><i class="far fa-edit" title="edit"></i></span>
-        <span class="delete"><i class="fas fa-trash-alt" title="delete"></i></span>
-        <span class="move up">
-            <i class="fas fa-arrow-up"></i>
-        </span>
-        <span class="move down">
-            <i class="fas fa-arrow-down"></i>
-        </span>
-    </li>
-    <script src="index.js"></script>
+  <img src="skull.png" id="skull" alt="">
+  <img src="quill.png" id="quill" alt="">
+
+  <h1>Spellbook</h1>
+
+  <form>
+    <div>
+      <input
+        type="text"
+        name="spellName"
+        placeholder="Enter a spell name"
+        autofocus
+      >
+      <input
+        type="number"
+        name="level"
+        placeholder="Level"
+        class="small"
+        min="1"
+        max="20"
+      >
+      <button type="submit">Add</button>
+    </div>
+  </form>
+
+  <main>
+    <ul id="spells">
+    </ul>
+  </main>
+
+
+  <li class="spell template">
+    <span class="name"></span>
+    <span class="level"></span>
+    <button class="delete">
+        <i class="far fa-trash-alt" title="remove"></i>
+    </button>
+    <button class="move up">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <button class="move down">
+        <i class="fas fa-arrow-down"></i>
+    </button>
+    <button class="fav">
+        <i class="fas fa-star" title="favorite"></i>
+    </button>
+  </li>
+
+  <script src="index.js"></script>
 </body>
 </html>

@@ -1,84 +1,127 @@
-class App  {
-    init(){
-        this.spellArray = []
-        this.template = document.querySelector('.spell.template')
-        this.list = document.querySelector('#spells')
-        const form = document.querySelector('form')
-        form.addEventListener('submit', ev => {
-            this.handleSubmit(ev)
-        })
+class App {
+    constructor() {
+      this.spells = []
+      this.template = document.querySelector('.spell.template')
+      this.list = document.querySelector('#spells')
+  
+      const form = document.querySelector('form')
+      form.addEventListener('submit', ev => {
+        this.handleSubmit(ev)
+      })
     }
-
-    handleSubmit(ev) {
-        ev.preventDefault()
-        const f = ev.target
-        const spell = {
-            name: f.spellName.value,
-            cost: f.manaCost.value,
-            fav: false,
+  
+    renderProperty(name, value) {
+      const el = document.createElement('span')
+      el.textContent = value
+      el.classList.add(name)
+      el.setAttribute('title', value)
+      return el
+    }
+  
+    renderItem(spell) {
+      const item = this.template.cloneNode(true)
+      item.classList.remove('template')
+  
+      // ['name', 'level', etc.]
+      const properties = Object.keys(spell)
+  
+      // Replace the appropriate values in each <span>
+      properties.forEach(property => {
+        const el = item.querySelector(`.${property}`)
+        if (el) {
+          el.textContent = spell[property]
+          el.setAttribute('title', spell[property])
         }
-        this.spellArray.push(spell)
-        const item = this.addListItem(spell)
-        const list = document.querySelector('#spells')
-        list.appendChild(item)
-        console.log(this.spellArray)
-        f.reset()
-        f.spellName.focus()
-    }
-
-    addListItem(spellObj){
-        const item = this.template.cloneNode(true)
-        item.classList.remove('template')
-
-        const properties = Object.keys(spellObj)
-
-        properties.forEach(property => {
-            const el = item.querySelector(`.${property}`)
-            if (el) {
-                el.textContent = spellObj[property]
-                el.setAttribute('title', spellObj[property])
-            }
-        })
-
-        const removeButton = item.querySelector('.delete')
-        removeButton.addEventListener('click', (ev) =>{
-            this.removeSpell(ev)
-        })
-
-        const editButton = item.querySelector('.edit')
-        editButton.addEventListener('click', (ev) => {
-            this.editSpell(ev)
-        })
-
-        const favButton = item.querySelector('.favButton')
-        favButton.addEventListener('click', (ev) => {
-            this.toggleFavorite(ev)
-        })
-
-        item
-            .querySelector('span.up')
-            .addEventListener(
-                'click',
-                this.moveUp.bind(this, spellArray)
+      })
+  
+      // delete button
+      item
+        .querySelector('button.delete')
+        .addEventListener(
+          'click',
+          this.removeSpell.bind(this, spell)
         )
-
-        return item
-
+  
+      // fav button
+      item
+        .querySelector('button.fav')
+        .addEventListener(
+          'click',
+          this.toggleFavorite.bind(this, spell)
+        )
+  
+      // move up
+      item
+        .querySelector('button.up')
+        .addEventListener(
+          'click',
+          this.moveUp.bind(this, spell)
+        )
+  
+      // move down
+      item
+        .querySelector('button.down')
+        .addEventListener(
+          'click',
+          this.moveDown.bind(this, spell)
+        )
+  
+  
+      return item
+    }
+  
+    moveDown(spell, ev) {
+      // Find the <li>
+      const button = ev.target
+      const item = button.closest('.spell')
+  
+      // Find its index in the array
+      const i = this.spells.indexOf(spell)
+  
+      // Only move it if it's not already last
+      if (i < this.spells.length - 1) {
+        // Move it in the array
+        const nextSpell = this.spells[i + 1]
+        this.spells[i + 1] = spell
+        this.spells[i] = nextSpell
+  
+        // Move it on the page
+        this.list.insertBefore(item.nextSibling, item)
+      }
+    }
+  
+    moveUp(spell, ev) {
+      // Find the <li>
+      const button = ev.target
+      const item = button.closest('.spell')
+  
+      // Find its index in the array
+      const i = this.spells.indexOf(spell)
+  
+      // Only move it if it's not already first
+      if (i > 0) {
+        // Move it in the array
+        const previousSpell = this.spells[i - 1]
+        this.spells[i - 1] = spell
+        this.spells[i] = previousSpell
+  
+        // Move it on the page
+        this.list.insertBefore(item, item.previousSibling)
+      }
+    }
+  
+    removeSpell(spell, ev) {
+      // Remove from the DOM
+      const button = ev.target
+      const item = button.closest('.spell')
+      item.parentNode.removeChild(item)
+  
+      // Remove from the array
+      const i = this.spells.indexOf(spell)
+      this.spells.splice(i, 1)
     }
 
-    removeSpell(ev){
-        let spell = ev.target.parentNode.parentNode
-        spell.parentNode.removeChild(spell)
-        let mySpell = {
-            name: spell.childNodes[0].textContent,
-            cost: spell.childNodes[1].textContent
-        }
-        let i = this.spellArray.indexOf(mySpell)
-        this.spellArray.splice(i, 1)
-        console.log(this.spellArray)
-    }
-
-    editSpell(ev){
+    editSpell(spell, ev){
         let spell = ev.target.parentNode.parentNode
         let mySpell = {
             name: spell.childNodes[1].textContent,
@@ -93,40 +136,31 @@ class App  {
         this.spellArray.splice(i, 1)
         console.log(this.spellArray)
     }
-
-    toggleFavorite(ev){
-        spell = ev.target.parentNode.parentNode
-        this.spellArray.fav = spell.classList.toggle('favSpell')
+  
+    toggleFavorite(spell, ev) {
+      const button = ev.target
+      const item = button.closest('.spell')
+      spell.favorite = item.classList.toggle('fav')
     }
-
-    moveUp(spell, ev){
-        const i = this.spellArray.indexOf(spell)
-
-        if(i > 0){
-            const button = ev.target
-            const item = button.closest('.spell')
-            this.list.insertBefore(item, item.previousSibling)
-
-            
-            const previousSpell = this.spellArray[i - 1]
-            this.spellArray[i-1] = spell
-            this.spellArray[i] = previousSpell
-        }
+  
+    handleSubmit(ev) {
+      ev.preventDefault()
+  
+      const f = ev.target
+  
+      const spell = {
+        name: f.spellName.value,
+        level: f.level.value,
+        favorite: false,
+      }
+      this.spells.push(spell)
+  
+      const item = this.renderItem(spell)
+      this.list.appendChild(item)
+  
+      f.reset()
+      f.spellName.focus()
     }
-
-    moveDown(spell, ev){
-        const i = this.spellArray.indexOf(spell)
-
-        if(i < this.spellArray.length - 1){
-            const button = ev.target
-            const item = button.closest('.spell')
-            this.list.insertBefore(item.nextSibling, item)
-
-            const nextSpell = this.spellArray[i + 1]
-            this.spellArray[i+1] = spell
-            this.spellArray[i] = nextSpell
-        }
-    }
-}
-
-new App()
+  }
+  
+  const app = new App()
