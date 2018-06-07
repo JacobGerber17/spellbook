@@ -1,14 +1,15 @@
-const app = {
-    init: function(){
+class App  {
+    init(){
         this.spellArray = []
         this.template = document.querySelector('.spell.template')
+        this.list = document.querySelector('#spells')
         const form = document.querySelector('form')
         form.addEventListener('submit', ev => {
             this.handleSubmit(ev)
         })
-    },
+    }
 
-    handleSubmit: function(ev) {
+    handleSubmit(ev) {
         ev.preventDefault()
         const f = ev.target
         const spell = {
@@ -23,13 +24,13 @@ const app = {
         console.log(this.spellArray)
         f.reset()
         f.spellName.focus()
-    },
+    }
 
-    addListItem: function(spellObj){
+    addListItem(spellObj){
         const item = this.template.cloneNode(true)
         item.classList.remove('template')
 
-        properties = Object.keys(spellObj)
+        const properties = Object.keys(spellObj)
 
         properties.forEach(property => {
             const el = item.querySelector(`.${property}`)
@@ -54,12 +55,19 @@ const app = {
             this.toggleFavorite(ev)
         })
 
+        item
+            .querySelector('span.up')
+            .addEventListener(
+                'click',
+                this.moveUp.bind(this, spellArray)
+        )
+
         return item
 
-    },
+    }
 
-    removeSpell: function(ev){
-        let spell = ev.target.parentNode
+    removeSpell(ev){
+        let spell = ev.target.parentNode.parentNode
         spell.parentNode.removeChild(spell)
         let mySpell = {
             name: spell.childNodes[0].textContent,
@@ -68,10 +76,10 @@ const app = {
         let i = this.spellArray.indexOf(mySpell)
         this.spellArray.splice(i, 1)
         console.log(this.spellArray)
-    },
+    }
 
-    editSpell: function(ev){
-        let spell = ev.target.parentNode
+    editSpell(ev){
+        let spell = ev.target.parentNode.parentNode
         let mySpell = {
             name: spell.childNodes[1].textContent,
             cost: spell.childNodes[3].textContent
@@ -84,12 +92,41 @@ const app = {
         let i = this.spellArray.indexOf(mySpell)
         this.spellArray.splice(i, 1)
         console.log(this.spellArray)
-    },
+    }
 
-    toggleFavorite : function(ev){
-        spell = ev.target.parentNode
+    toggleFavorite(ev){
+        spell = ev.target.parentNode.parentNode
         this.spellArray.fav = spell.classList.toggle('favSpell')
-    },
+    }
+
+    moveUp(spell, ev){
+        const i = this.spellArray.indexOf(spell)
+
+        if(i > 0){
+            const button = ev.target
+            const item = button.closest('.spell')
+            this.list.insertBefore(item, item.previousSibling)
+
+            
+            const previousSpell = this.spellArray[i - 1]
+            this.spellArray[i-1] = spell
+            this.spellArray[i] = previousSpell
+        }
+    }
+
+    moveDown(spell, ev){
+        const i = this.spellArray.indexOf(spell)
+
+        if(i < this.spellArray.length - 1){
+            const button = ev.target
+            const item = button.closest('.spell')
+            this.list.insertBefore(item.nextSibling, item)
+
+            const nextSpell = this.spellArray[i + 1]
+            this.spellArray[i+1] = spell
+            this.spellArray[i] = nextSpell
+        }
+    }
 }
 
-app.init()
+new App()
