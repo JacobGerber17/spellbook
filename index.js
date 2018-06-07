@@ -56,8 +56,8 @@ const app = {
         let removeButton = document.createElement('span')
         removeButton.textContent = 'X'
         removeButton.classList.add('delete')
-        removeButton.addEventListener('click', ev => {
-            this.removeSpell(removeButton.parentNode)
+        removeButton.addEventListener('click', (ev) =>{
+            this.removeSpell(ev)
         })
         return removeButton;
     },
@@ -66,13 +66,14 @@ const app = {
         let editButton = document.createElement('span')
         editButton.textContent = 'Edit'
         editButton.classList.add('edit')
-        editButton.addEventListener('click', ev => {
-            this.editSpell(editButton.parentNode)
+        editButton.addEventListener('click', (ev) => {
+            this.editSpell(ev)
         })
         return editButton
     },
 
-    removeSpell: function(spell){
+    removeSpell: function(ev){
+        let spell = ev.target.parentNode
         spell.parentNode.removeChild(spell)
         let mySpell = {
             name: spell.childNodes[0].textContent,
@@ -83,16 +84,20 @@ const app = {
         console.log(this.spellArray)
     },
 
-    editSpell: function(spell){
-        let spellName = spell.childNodes[0].textContent
-        let spellCost = spell.childNodes[1].textContent
-        let cost = spellCost.split(' ')[0]
+    editSpell: function(ev){
+        let spell = ev.target.parentNode
+        let mySpell = {
+            name: spell.childNodes[0].textContent,
+            cost: spell.childNodes[1].textContent
+        }
+        let cost = mySpell.cost.split(' ')[0]
         let finalCost = cost.substring(1, cost.length)
         const form = document.querySelector('form')
-        form.spellName.value = spellName
+        form.spellName.value = mySpell.name
         form.manaCost.value = finalCost
         spell.parentNode.removeChild(spell)
-        let i = this.spellArray.indexOf([spellName, spellCost])
+        
+        let i = this.spellArray.indexOf(mySpell)
         this.spellArray.splice(i, 1)
         console.log(this.spellArray)
     },
