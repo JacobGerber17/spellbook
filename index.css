@@ -145,7 +145,7 @@ input.small {
 }
 
 .spell .name {
-  text-decoration: underline;
+  text-transform: capitalize;
   width: 80%;
   overflow-x: hidden;
   text-overflow: ellipsis;
@@ -173,6 +173,7 @@ button.move {
 }
 
 .spell.fav {
+  font-weight: bolder;
   background-color: goldenrod;
 }
 
